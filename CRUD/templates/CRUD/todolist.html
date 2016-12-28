@@ -1,0 +1,52 @@
+{% extends "CRUD/base.html" %}
+{% block title %}
+  {{list.task}}|{{block.super}}
+{% endblock title %}
+{% block content %}  
+   <div class="container">
+     <nav class="navbar navbar-default">
+     <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">{{list.task}} Tasks</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="{% url 'CRUD:gcreatetask' %}" data-toggle="modal" data-target="#newTaskName" class="newTaskName" ><span class="glyphicon glyphicon-plus"></span> Add new TodoTask</a></li>
+        </ul>
+      </div>
+   </nav>
+
+  <!-- Table -->
+       <table class="table">
+          <thead>
+           <tr>
+           	   <th>SubTask</th>
+           	   <th>Lenth(in weeks)</th>
+           	   <th>Completed</th>
+           </tr>
+           </thead>
+           {% if list %}
+             <tbody>
+           	   {% for l in list.todolist_set.all %}
+                  <tr>
+                    <td>{{l.subtask}}</td>
+                    <td>{{l.length}}</td>
+                    <td>{{l.completed}}</td>
+                    <td><a href="{% url 'CRUD:glistupdate' l.id %}"><button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">UPDATE</button></a></td>
+                    <td><a href="{% url 'CRUD:glistdelete' l.id %}"><button type="button" class="btn btn-danger" data-toggle="button" aria-pressed="false" autocomplete="off">DELETE</button></a></td>
+                  </tr>
+               {% endfor %}
+              </tbody>
+           {% endif %}
+       </table>
+   </div>
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+

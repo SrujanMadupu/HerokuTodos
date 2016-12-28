@@ -1,0 +1,17 @@
+{% extends "CRUD/base.html" %}  
+{% block content %}
+    <div class="center">
+        <div class="card">
+            <form action="" method="post">
+                {% csrf_token %}
+                <p><span>Are you sure you want to delete "{{ object }}" ?</span></p>
+                <input type="submit" class="btn btn-success btn-sm" value="Confirm" />
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="{% url 'CRUD:gtodos' %}" class="btn btn-primary btn-sm"> Back </a>
+            </form>
+        </div>
+    </div>   
+{% endblock content %}
+
+
+
