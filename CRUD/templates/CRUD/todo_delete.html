@@ -1,6 +1,7 @@
 {% extends "CRUD/base.html" %}  
 {% block content %}
-    <div class="center">
+   {% load bootstrap %}
+    <div class="col-sm-6 col-sm-offset-3" >
         <div class="card">
             <form action="" method="post">
                 {% csrf_token %}

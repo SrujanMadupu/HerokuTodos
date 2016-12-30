@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'CRUD',
+    'Accounts',
+    'bootstrapform',
 ]
 
 MIDDLEWARE_CLASSES = [
