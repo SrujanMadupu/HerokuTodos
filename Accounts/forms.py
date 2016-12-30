@@ -21,7 +21,7 @@ class LoginForm(forms.Form):
 				raise forms.ValidationError("Incurrect password")
 			if not user.is_active:
 				raise forms.ValidationError("This user is no longer active")
-	        return super(LoginForm,self).clean()
+		return super(LoginForm,self).clean()
 
 
 
