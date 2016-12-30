@@ -8,6 +8,7 @@
 	        {% csrf_token %}
 	        {{form|bootstrap}}
 	        <button type="submit" class="btn btn-success">Submit</button>
+          <a href="{% url 'Accounts:register' %}" class="btn btn-primary" role="button">Create New Account</a>
         </form>
     </div>
  </div>
