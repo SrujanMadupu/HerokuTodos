@@ -4,6 +4,7 @@ from django.urls import reverse,reverse_lazy
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.contrib.auth.models import User
 
 
 
@@ -14,6 +15,8 @@ class AllTodos(ListView):
 	context_object_name = 'todos'
 	def dispatch(self,*args,**kwargs):
 		return super(AllTodos,self).dispatch(*args,**kwargs)
+	def get_queryset(self):
+		return Todo.objects.all()
 
 
 

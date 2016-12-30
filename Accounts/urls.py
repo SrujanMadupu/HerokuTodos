@@ -6,5 +6,5 @@ urlpatterns = [
     url(r'^login/$',login_view,name="login"),
     url(r'^register/$',Register_view,name="register"),
     url(r'^logout/$',Logout_view,name="logout"),
-
+    
 ]
