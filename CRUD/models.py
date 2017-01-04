@@ -6,7 +6,7 @@ from django.db import models
 class Todo(models.Model):
 	task = models.CharField(max_length=120)
 	created = models.DateTimeField(auto_now=False,auto_now_add=True)
-	lastdate = models.DateField(auto_now=False,auto_now_add=False)
+	lastdate = models.DateField(auto_now=False,auto_now_add=False,help_text="Please use the following format: <em>YYYY-MM-DD</em>.")
 	def __str__(self):
 		return self.task
 
