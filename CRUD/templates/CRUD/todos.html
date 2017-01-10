@@ -39,6 +39,19 @@
               </tbody>
            {% endif %}
         </table>
+                        <div class="pagination">
+                <span class="step-links">
+                    {% if todos.has_previous %}
+                      <a href="?page={{ todos.previous_page_number }}">previous</a>
+                    {% endif %}
+                <span class="current">
+                    Page {{ todos.number }} of {{ todos.paginator.num_pages }}.
+                </span>
+                {% if todos.has_next %}
+                  <a href="?page={{ todos.next_page_number }}">next</a>
+                {% endif %}
+                </span>
+            </div>
       </div>
 {% endblock content %}    
 

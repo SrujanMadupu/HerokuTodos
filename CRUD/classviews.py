@@ -5,6 +5,8 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.views.generic.base import ContextMixin
 
 
 
@@ -16,20 +18,41 @@ class AllTodos(ListView):
 	def dispatch(self,*args,**kwargs):
 		return super(AllTodos,self).dispatch(*args,**kwargs)
 	def get_queryset(self):
-		return Todo.objects.all()
+		todo_list =  Todo.objects.all()
+		paginator = Paginator(todo_list,9)
+		page = self.request.GET.get('page')
+		try:
+			objs = paginator.page(page)
+		except PageNotAnInteger:
+			objs = paginator.page(1)
+		except EmptyPage:
+			objs = paginator.page(paginator.num_pages)
+		return objs
 
 
 
 @method_decorator(login_required, name='dispatch')
-class DetailTodolist(ListView):
+class DetailTodolist(ListView,ContextMixin):
 	model = todolist
 	template_name = 'CRUD/todolist.html'
-	context_object_name = 'list'
+	#context_object_name = 'list'
 	def dispatch(self,*args,**kwargs):
 		return super(DetailTodolist,self).dispatch(*args,**kwargs)
-	def get_queryset(self):
-		return get_object_or_404(Todo,id=self.kwargs['pk'])
-		#return obj.todolist_set.all()
+	def get_context_data(self, **kwargs):
+		context = super(DetailTodolist, self).get_context_data(**kwargs)
+		todo_obj = get_object_or_404(Todo,id=self.kwargs['pk'])
+		todo_items = todo_obj.todolist_set.all()
+		paginator = Paginator(todo_items,9)
+		page = self.request.GET.get('page')
+		try:
+			objs = paginator.page(page)
+		except PageNotAnInteger:
+			objs = paginator.page(1)
+		except EmptyPage:
+			objs = paginator.page(paginator.num_pages)
+		context['list'] = objs
+		context['title'] = todo_obj.task
+		return context
 
 
 
